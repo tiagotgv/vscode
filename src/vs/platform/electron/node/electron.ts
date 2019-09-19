@@ -6,10 +6,11 @@
 import { MessageBoxOptions, MessageBoxReturnValue, OpenDevToolsOptions, SaveDialogOptions, OpenDialogOptions, OpenDialogReturnValue, SaveDialogReturnValue } from 'electron';
 import { createDecorator } from 'vs/platform/instantiation/common/instantiation';
 import { INativeOpenDialogOptions } from 'vs/platform/windows/common/windows';
+import { ISimpleServiceProxyChannelTargetWithContext } from 'vs/platform/ipc/node/simpleIpcProxy';
 
 export const IElectronService = createDecorator<IElectronService>('electronService');
 
-export interface IElectronService {
+export interface IElectronService extends ISimpleServiceProxyChannelTargetWithContext<number /* Window ID */> {
 
 	_serviceBrand: undefined;
 

@@ -5,10 +5,11 @@
 
 import { createDecorator } from 'vs/platform/instantiation/common/instantiation';
 import { URI } from 'vs/base/common/uri';
+import { ISimpleServiceProxyChannelTarget } from 'vs/platform/ipc/node/simpleIpcProxy';
 
 export const IMenubarService = createDecorator<IMenubarService>('menubarService');
 
-export interface IMenubarService {
+export interface IMenubarService extends ISimpleServiceProxyChannelTarget {
 	_serviceBrand: undefined;
 
 	updateMenubar(windowId: number, menuData: IMenubarData): Promise<void>;

@@ -7,8 +7,9 @@ import { IMenubarService, IMenubarData } from 'vs/platform/menubar/node/menubar'
 import { Menubar } from 'vs/platform/menubar/electron-main/menubar';
 import { ILogService } from 'vs/platform/log/common/log';
 import { IInstantiationService } from 'vs/platform/instantiation/common/instantiation';
+import { SimpleServiceProxyChannelTarget } from 'vs/platform/ipc/node/simpleIpcProxy';
 
-export class MenubarMainService implements IMenubarService {
+export class MenubarMainService extends SimpleServiceProxyChannelTarget implements IMenubarService {
 
 	_serviceBrand: undefined;
 
@@ -18,6 +19,8 @@ export class MenubarMainService implements IMenubarService {
 		@IInstantiationService private readonly instantiationService: IInstantiationService,
 		@ILogService private readonly logService: ILogService
 	) {
+		super();
+
 		// Install Menu
 		this._menubar = this.instantiationService.createInstance(Menubar);
 	}

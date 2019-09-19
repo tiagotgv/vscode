@@ -9,8 +9,9 @@ import { MessageBoxOptions, MessageBoxReturnValue, shell, OpenDevToolsOptions, S
 import { ILifecycleMainService } from 'vs/platform/lifecycle/electron-main/lifecycleMainService';
 import { OpenContext, INativeOpenDialogOptions } from 'vs/platform/windows/common/windows';
 import { isMacintosh } from 'vs/base/common/platform';
+import { SimpleServiceProxyChannelTargetWithContext } from 'vs/platform/ipc/node/simpleIpcProxy';
 
-export class ElectronMainService implements IElectronService {
+export class ElectronMainService extends SimpleServiceProxyChannelTargetWithContext<number /* Window ID */> implements IElectronService {
 
 	_serviceBrand: undefined;
 
@@ -18,6 +19,7 @@ export class ElectronMainService implements IElectronService {
 		@IWindowsMainService private readonly windowsMainService: IWindowsMainService,
 		@ILifecycleMainService private readonly lifecycleMainService: ILifecycleMainService
 	) {
+		super();
 	}
 
 	//#region Window

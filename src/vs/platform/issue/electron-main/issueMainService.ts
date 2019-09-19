@@ -16,10 +16,11 @@ import { isMacintosh, IProcessEnvironment } from 'vs/base/common/platform';
 import { ILogService } from 'vs/platform/log/common/log';
 import { IWindowState, IWindowsMainService } from 'vs/platform/windows/electron-main/windows';
 import { listProcesses } from 'vs/base/node/ps';
+import { SimpleServiceProxyChannelTarget } from 'vs/platform/ipc/node/simpleIpcProxy';
 
 const DEFAULT_BACKGROUND_COLOR = '#1E1E1E';
 
-export class IssueMainService implements IIssueService {
+export class IssueMainService extends SimpleServiceProxyChannelTarget implements IIssueService {
 	_serviceBrand: undefined;
 	_issueWindow: BrowserWindow | null = null;
 	_issueParentWindow: BrowserWindow | null = null;
@@ -35,6 +36,7 @@ export class IssueMainService implements IIssueService {
 		@IDiagnosticsService private readonly diagnosticsService: IDiagnosticsService,
 		@IWindowsMainService private readonly windowsMainService: IWindowsMainService
 	) {
+		super();
 		this.registerListeners();
 	}
 

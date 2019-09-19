@@ -4,6 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { createDecorator } from 'vs/platform/instantiation/common/instantiation';
+import { ISimpleServiceProxyChannelTarget } from 'vs/platform/ipc/node/simpleIpcProxy';
 
 export const IIssueService = createDecorator<IIssueService>('issueService');
 
@@ -86,7 +87,7 @@ export interface ProcessExplorerData extends WindowData {
 	styles: ProcessExplorerStyles;
 }
 
-export interface IIssueService {
+export interface IIssueService extends ISimpleServiceProxyChannelTarget {
 	_serviceBrand: undefined;
 	openReporter(data: IssueReporterData): Promise<void>;
 	openProcessExplorer(data: ProcessExplorerData): Promise<void>;
